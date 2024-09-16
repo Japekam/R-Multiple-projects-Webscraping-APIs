@@ -1,0 +1,108 @@
+---
+title: "Project 2"
+author: "Japekam Singh Dang"
+subtitle: "STATS 220 Semester One 2024"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+
+```{css}
+body {
+  font-size: 16px; /* Changing the default font size */
+}
+p {
+  color: #CC000F; /* Changing the text color to red */
+}
+h1, h2, h3 {
+  font-weight: bold; /* Making headings bold */
+}
+```
+
+## Introduction
+
+This report focuses on how user behaviour on streaming platforms changes over several weeks. Specifically, I tried to track the content preferences and viewing frequency of users. Understanding these fluctuations can provide valuable insights for streaming services to improve their offerings.
+
+While collecting data through the Google Form (link here: <https://forms.gle/E6hqTY4D1RYbAnobA>), I tried to adhere to the four design guidelines covered in Module 2:
+
+Clarity and Conciseness: Questions are straightforward and avoid ambiguity to ensure clear understanding. User-friendliness: The form maintains a streamlined structure with logical question flow for a smooth experience. Reduction of Burden: The form is concise, minimising the time and effort required for completion. Variety of Question Types: We incorporated a mix of question types (e.g., multiple choice, short answers) to capture relevant data efficiently.
+
+Our survey gathers baseline information on typical content choices and viewing times. It then implements follow-up questions to track potential shifts in these preferences over subsequent weeks. By analysing responses across multiple data collection points, we aim to identify trends in user behaviour on streaming platforms and how users' viewing habits evolve.
+
+This data can be used to understand how various factors, such as platform recommendations or new content releases, influence user choices. Ultimately, the insights gained can contribute to improved content curation, personalised recommendations, and a more engaging user experience on streaming platforms.
+
+## Analytics
+
+### Static Statements
+
+1)  Streaming Platform Preference Distribution: A high percentage of respondents reported favoring Youtube as their most viewed streaming platform, with a smaller but consistent preference for other platforms like Netflix and Amazon Prime Video.
+
+2)  Weekly Viewing Habits: While most of the viewers viewed content anywhere in between 6 - 50 hours, I found 2 outliers in the data set. A person who watched content for 2 hours last week and a person who watched it for 70 hours! 😱
+
+3)  Video Duration: More than 50% people (around 55%) prefer to watch short content(shorter than 30 mins) vs watching longer videos! Not so surprisingly, 65% of the older generation (above 45), contribute to the majority of population who like watching longer videos.
+
+Code for reading the csv file as follows:
+
+```{r file-reading-code, eval=TRUE}
+
+# storing file url under variable
+
+csv_file <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vTo1YWxgaYk67TgDdjHUMv15iGKFyyGu3NmsUGtbjZTjRKtB-TEDQdLaF-6pnWbZswYzbT7EK7c53Kb/pub?output=csv"
+
+# reading the csv file data and saving it
+
+learning_data <- read_csv(csv_file)%>%
+  
+  # changing names to make it easier
+  
+  rename( filling_time = 1,
+          age_group = 2,
+          total_weekly_consumption = 3,
+          favourite_streaming_platform = 4,
+          device_used = 5,
+          duration_of_content = 6,
+          genre = 7)
+
+glimpse(learning_data)
+```
+
+Some interesting stats as follows:
+
+```{r text-based-stats, eval=TRUE}
+
+paste("Last week, the average survey respondent watched content for", mean(learning_data$total_weekly_consumption) %>% round(2), "hours")
+
+paste("The maximum average time spent by an individual watching a single video in a week, as per my survey, is", max(learning_data$duration_of_content), "minutes")
+
+```
+
+Some cool graphs related to the research as follows:
+
+```{r graph-based-stats, eval=TRUE}
+
+learning_data %>%
+  ggplot +
+  geom_bar(aes(x = favourite_streaming_platform),
+           fill = "#BFF018") +
+  labs(title = "Most used streaming platforms", x = "Streaming Platforms", y = "Total number of viewers")
+
+learning_data %>%
+  ggplot +
+  geom_bar(aes(x = device_used),
+           fill = "#F000FF") +
+  labs(title = "Most common device used for streaming", x = "Device type", y = "Total number of viewers")
+
+```
+
+## Creativity
+
+I used creativity in couple of ways. I only made a couple of google forms before but I have never invested so much time in designing it. I used couple of animal memes from the internet to make it feel more lively and cheerful. I also found a theme aligned with my research question, i.e content consumption, which was a camcorder in the background. I asked people from different backgrounds, such as my friends overseas, different age groups, like my grandparents in India, to make the data as interesting and honest as I can( to avoid any bias/skew in it). I also labelled the Barplots and changed their fill color. And you can see some of emojis here 😃
+
+## Learning reflection
+
+The key takeaway from this project is the realization that even with basic tools like Google Forms, it's possible to develop forms that are both informative and engaging. I was surprised to discover that the platform offers tools that can make even the most basic survey interesting. I also learnt how hard it is to get people to put something on a form, or in general how hard it is to gather data. In terms of coding, although I have some prior knowledge of R (and coding in general) from my other courses in Uni, I actually learnt how to effectively use "pipes" and "+" in R. I am looking forward to learn more syntax of R.

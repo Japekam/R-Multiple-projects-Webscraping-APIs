@@ -1,0 +1,107 @@
+---
+title: "Project 3"
+author: "Japekam Singh Dang"
+subtitle: "STATS 220 Semester One 2024"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+photo_data <- read.csv("selected_photos.csv")
+```
+
+```{css}
+body {
+  font-size: 16px; /* Changing the default font size */
+}
+p {
+  color: #CC000F; /* Changing the text color to red */
+}
+h1, h2, h3 {
+  font-weight: bold; /* Making headings bold */
+}
+```
+
+## Introduction
+
+Introduction: The two words I used to search for photos were "tall buildings". I chose these words because I thought the photos that would be displayed would have a large variety of the types of building structures, and since I really like skyscrapers, I thought it would be a cool idea to incorporate these into my project. Here's the screenshot of the first few rows of royalty free photos:
+
+![](top_photos.png)
+
+```{r}
+photo_data %>%
+  select(pageURL) %>%
+  knitr::kable()
+```
+
+-   I noticed that most of these pictures were landscape, showing the sky along with the building too.
+-   I noticed that most of these buildings were far taller than average buildings here in Auckland.
+-   I noticed that all photos were either taken in the day, or the late hours of the evening.
+
+Here's the Animated GIF:
+
+![](my_photos.gif)
+
+## Key Features
+
+### **Max Views**
+
+```{r}
+max_views <- photo_data$views %>% max(na.rm = TRUE)
+```
+
+The maximum number of views on a single photo was `r max(photo_data$views)`.
+
+### **Total Downloads**
+
+```{r}
+total_downloads <- photo_data$downloads %>% sum(na.rm = TRUE)
+```
+
+`r sum(photo_data$likes)` was the total number of downloads done of my selected photos on Pixabay.
+
+### **Min Views**
+
+```{r}
+min_views <- photo_data$views %>% min(na.rm = TRUE)
+```
+
+The minimum number of views on a single photo was `r min(photo_data$views)`.
+
+### **Median Likes**
+
+```{r}
+median_likes <- photo_data$likes %>% median(na.rm = TRUE) %>% round()
+```
+
+The median number of likes of all of my selected posts were `r round(median(photo_data$likes))`.
+
+## Creativity
+
+I made a plot using the new categorical variable that I created, along with the download_ratio to see whether the number of likes in photos affects the ratio of views to downloads it gets. On top of that, I used labs to title my plot and variables, and fill my bars with colour. Also, I used the stat and position values in the geom bar function to adjust the position of the bars side by side. I also used a css chunk for this assignment even when not necessary for this project, and used that to change the font used for the project.
+
+Here's the Plot that I created :
+
+```{r}
+library(ggplot2)
+ggplot(photo_data, aes(x = category, y = download_ratio, fill = category)) +
+  geom_bar(stat = "identity", position = "dodge") +  # Display bars side-by-side
+  labs(title = "Download Ratio by Category",
+       x = "Category",
+       y = "Download Ratio",
+       fill = "Category")
+```
+
+
+## Learning Reflection
+
+Manipulating the data frames with the dplyr library was one of the key learning objectives for this project, and in this project, I was able to do just that. I used the mutate, filter and select functions in order to create new variables for the data frame, filter out values for it and select specific variables from a bigger dataset, which was the photos JSON file that was given by Pixabay. In future, I would like to learn about how I can use other functions to manipulate data frames further, and also learn about how manipulating data frames can be useful in the real world of Data Science!
+
+## Appendix
+
+```{r file='exploration.R', eval=FALSE, echo=TRUE}
+
+```

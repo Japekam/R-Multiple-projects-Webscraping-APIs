@@ -1,0 +1,59 @@
+---
+title: "Project 4"
+author: "Japekam Singh Dang"
+subtitle: "Visualising data about videos from the YouTube channels Shark Tank India and Shark Tank Global"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  font-size: 16px; /* Changing the default font size */
+}
+p {
+  color: blue; /* Changing the text color to red */
+}
+h1, h2, h3 {
+  font-weight: bold; /* Making headings bold */
+}
+```
+
+## INTRODUCTION
+
+The two channels I chose for my project were two Shark Tank channels: in particular, Shark Tank India, and Shark Tank Global). The reason I chose these channels is because, I am very interested in Shark Tank as a whole, it is one of my favourite shows to watch, and I was wondering if having just one region of the show made a difference to the YouTube Analytics generated, as compared to globally, and I wanted to use this project as an opportunity to explore that.
+
+The two ideas I had for exploration before I started the project were:
+
+1.  Seeing if the video title length really affected the number of views the video got; and seeing the frequency of videos by like to view ratio. In order to see whether video title length affected number of views, I just made a scatter plot, where each point represents a video showing its specific count of characters on the x-axis, and the number of views on the y-axis.
+
+2.  In order to see the frequency of videos with specific like to view ratios, I created a Histogram with 30 bins, and plotted the like to view ratio on the x-axis and the frequency on y-axis.
+
+Challenge faced :
+
+I also tried creating a bar chart showing whether the average view duration of a video is affected by its length, however, I realised it is rather obvious that it is pretty much directly correlated, and therefore, decided not to include it in my report. I realised I could not make any useful statistical inference out of this plot.
+
+## DYNAMIC DATA STORY
+
+![](data_story.gif)
+
+To show creativity, I used theme that sets the legend to none in my first plot. Apart from that, I also to quantify engagement, I simply added the comment and like count and tried to calculate engagement ration. I used functions like position, arrange, reorder, str_count. Also I tried to uncover a lot of questions which I had by creating 8-10 plots(but only displaying 5 here, which is much more than required). Apart from that, I used different colors, and kept my color theme as "lightcolors", (I did use chatgpt to ask for some colors.) :)
+
+## LEARNING REFLECTION
+
+In the learning objectives for this Module, one of them was regarding the exploration of creating visualisations with ggplot2. Throughout this project, we created a lot of different types of plots with ggplot2, ranging from a histogram, to a scatter plot. Additionally, we used the labs within this to basically make our plots look good. I'm looking forward to ultimately seeing how much further I can go to make our plots look presentable, and learning more about what distinguishes a useful information plot from one that is not very statistically useful. I am also excited to start my introduction to SQL for the first time.
+
+## APPENDIX
+
+```{r file='visualisations.R', eval=FALSE, echo=TRUE}
+
+```
+
+```{r eval=FALSE, echo=TRUE, file='data_story.R'}
+
+```

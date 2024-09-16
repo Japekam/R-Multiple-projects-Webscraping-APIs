@@ -1,0 +1,99 @@
+---
+title: "Project 5"
+author: "Japekam Singh Dang"
+subtitle: "Creating data from digital sources"
+output:
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(rvest)
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+## Part A
+
+For Part A of this project, I explored the global health metrics provided by the World Health Organization (WHO). I chose this topic because I find it fascinating to see how health trends and challenges vary around the world. The WHO’s data is incredibly detailed and reliable, making it perfect for exploring important issues in global health. Plus, understanding these metrics can really help in shaping effective public health strategies. It was quite interesting yet sad to see a big disparity amongst developed and non developed regions of the world.
+
+```{r file='partA.R'}
+
+```
+
+## Part B
+
+```{r file='partB.R', results='hide'}
+
+```
+
+### **Maximum Title Length**
+
+```{r}
+max_num_words_title <- release_data$release_title %>%
+  str_count("\\w+") %>%
+  max()
+```
+
+The maximum number of words used in a title was `r max_num_words_title`
+
+### **Average number of words in releases**
+
+```{r}
+mean_num_words_content <- release_data$release_content %>% str_count("\\w+") %>% mean()
+```
+
+The Average number of words in releases was `r mean_num_words_content`
+
+### **Median sentence length in content**
+
+```{r}
+median_sentence_length <- release_data$release_content %>%
+  str_split("\\.\\s+") %>%
+  lengths() %>%
+  median()
+```
+
+The Median sentence length in content was `r median_sentence_length`
+
+### **Ratio of unique words to total words**
+
+```{r}
+unique_words_ratio <- release_data$release_content %>%
+  str_split("\\s+") %>%
+  unlist() %>%
+  unique() %>%
+  length() / sum(str_count(release_data$release_content, "\\w+"))
+```
+
+The Ratio of unique words to total words in content was `r unique_words_ratio`
+
+### **Frequency of word Future**
+
+```{r}
+# Count of the word "future" in various forms in the release content
+release_data <- release_data %>%
+  mutate(future_word_used_count = str_count(release_data$release_content, "future|Future|FUTURE"))
+
+# Total count of the word "future" across all releases
+total_future_word_used_count <- release_data$future_word_used_count %>% sum()
+```
+
+The Frequency of word Future in content was `r total_future_word_used_count`
+
+## Part C
+
+```{r file='partC.R'}
+
+```
+
+The bargraph shows how often certain keywords ("employment", "environment", "economy") popped up in speeches each year compared to the total number of speeches, showcasing trends in the focus of speeches over time.
+
+## Learning Reflection
+
+This module taught me some crucial skills like web scraping and combining data from different tables. I got a good grasp on the basics of web scraping through the various parts of this project. Although I'm not an expert yet, I feel comfortable scraping simple websites ( of course that permit it). For instance, in Part A, delving into the World Health Organization's data helped me grasp the basics of web scraping. It was fascinating to see how I could extract valuable information like country profiles and health statistics. Moving on to Part B, analyzing Hon. Erica Stanford's releases was a bit challenging, but it really helped me understand how to deal with technical terms and varying content lengths. Finally, in Part C, diving into government speeches to find keywords like "employment" was an intriguing exercise that deepened my understanding of data analysis. Overall, it was quite a great learning experience. 
+
+## Self Review
+
+I would say that I have really learnt the meaning of data analysis through this course. I did a course before namely Stats 201 which gave me a fair amount of background of R, so I did not struggle with coding part. My favorite part of this course was creating bar graphs and plots in module 4. Overall, I also learnt some basic syntax of SQL, which might be very helpful in future. I also learnt how to communicate with shareholders because creating cool insights is one thing, but making those insights heard is other. My least favourite part of this course was doing some silly mistakes in my projects and losing marks for that. I enjoyed my overall progress in the course. Hopefully, I will keep my journey going!! 
+PS - As a class rep, I also learnt some important skills like leadership and communication. :)
